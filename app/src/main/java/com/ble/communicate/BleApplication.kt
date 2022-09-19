@@ -1,6 +1,16 @@
 package com.ble.communicate
 
-import com.ble.commonlib.base.BaseApplication
+import android.app.Application
+import android.content.Context
 
-class BleApplication : BaseApplication() {
+class BleApplication : Application()  {
+    companion object {
+        @JvmField
+        var context: Context? = null
+    }
+
+    override fun onCreate() {
+        context = this
+        super.onCreate()
+    }
 }
