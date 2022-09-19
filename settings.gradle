@@ -1,0 +1,3 @@
+include ':commonLib'
+include ':app'
+rootProject.name = "ble-communicate-master"
