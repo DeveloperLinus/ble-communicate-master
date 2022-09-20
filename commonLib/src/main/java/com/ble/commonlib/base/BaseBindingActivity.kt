@@ -54,4 +54,8 @@ abstract class BaseBindingActivity<T : ViewDataBinding> : Activity() {
         }
         window.decorView.systemUiVisibility = uiFlags
     }
+
+    override fun onResume() {
+        super.onResume()
+    }
 }

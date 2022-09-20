@@ -162,4 +162,14 @@ class EngineerActivity : BaseBindingActivity<ActivityEngineerBinding>(), Corouti
         cancel()
         super.onDestroy()
     }
+
+    override fun onResume() {
+        super.onResume()
+        EventBus.getDefault().register(this)
+    }
+
+    override fun onPause() {
+        super.onPause()
+        EventBus.getDefault().unregister(this)
+    }
 }
