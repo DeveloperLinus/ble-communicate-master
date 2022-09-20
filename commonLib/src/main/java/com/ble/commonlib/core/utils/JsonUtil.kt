@@ -1,8 +1,10 @@
 package com.ble.commonlib.core.utils
 
 import android.util.Log
+import com.alibaba.fastjson.JSON
 import com.google.gson.Gson
 import com.google.gson.JsonParser
+import java.lang.reflect.Type
 
 object JsonUtil {
     private const val TAG = "JsonUtil"
@@ -48,5 +50,13 @@ object JsonUtil {
             Log.e(TAG, "getValue: json=$json")
         }
         return eventType
+    }
+
+    fun toJsonString2(data: Any?): String? {
+        return JSON.toJSONString(data)
+    }
+
+    fun <T> parseJson(json: String?, type: Type?): T {
+        return JSON.parseObject(json, type)
     }
 }

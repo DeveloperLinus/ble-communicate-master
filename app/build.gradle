@@ -58,6 +58,7 @@ android {
 
 dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
+    implementation 'com.alibaba:fastjson:1.2.54'
     implementation 'com.yanzhenjie.andserver:api:2.0.5'
     implementation 'com.yanzhenjie.andserver:annotation:2.0.5'
     kapt 'com.yanzhenjie.andserver:processor:2.0.5'

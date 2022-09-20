@@ -53,4 +53,5 @@ dependencies {
     implementation('com.thoughtworks.xstream:xstream:1.4.15') {
         exclude group: 'xmlpull', module: 'xmlpull'
     }
+    implementation 'com.alibaba:fastjson:1.2.54'
 }
