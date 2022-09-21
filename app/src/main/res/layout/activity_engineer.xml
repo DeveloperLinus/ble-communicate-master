@@ -1,20 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android">
+
     <data>
+
         <variable
             name="wifiName"
             type="String" />
+
         <variable
             name="wifiPassword"
             type="String" />
+
         <variable
             name="connName"
             type="String" />
+
         <variable
             name="countDown"
             type="String" />
+
         <import type="android.view.View" />
     </data>
+
     <LinearLayout xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -33,7 +40,8 @@
                 android:id="@+id/tv_log"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textSize="20dp" />
+                android:textSize="30sp"
+                android:textStyle="bold" />
 
         </ScrollView>
 

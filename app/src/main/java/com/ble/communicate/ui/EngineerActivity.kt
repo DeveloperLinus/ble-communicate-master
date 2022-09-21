@@ -92,7 +92,6 @@ class EngineerActivity : BaseBindingActivity<ActivityEngineerBinding>(), Corouti
 
             override fun onStarted(ip: String) {
                 showLog("WEB服务开启,ip地址为->$ip")
-                log("WEB服务开启,ip地址为->$ip")
                 showInit(false, padID, mPaw)
             }
 

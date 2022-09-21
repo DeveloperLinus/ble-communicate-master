@@ -15,18 +15,22 @@ import java.lang.reflect.Type
 @Converter
 class AppMessageConverter : MessageConverter {
     override fun convert(output: Any, mediaType: MediaType?): ResponseBody {
-        log("AppMessageConverter start convert1")
+        log("AppMessageConverter start convert1, output->${output.toString()}")
         val body = JsonBody(JsonParser.successfulJson(output as Object))
-        log("AppMessageConverter end convert1")
+        log("AppMessageConverter end convert1, body->${body.toString()}")
         return body
     }
 
     override fun <T : Any?> convert(stream: InputStream, mediaType: MediaType?, type: Type?): T? {
         log("AppMessageConverter start convert2")
         val charset = mediaType?.charset
+        var result: T? = null
         if (charset == null) {
-            return JsonUtil.parseJson(IOUtils.toString(stream), type)
+            result = JsonUtil.parseJson(IOUtils.toString(stream), type)
+        } else {
+            result = JsonUtil.parseJson(IOUtils.toString(stream, charset), type)
         }
-        return JsonUtil.parseJson(IOUtils.toString(stream, charset), type)
+        log("AppMessageConverter end convert2, result->${result.toString()}")
+        return result
     }
 }

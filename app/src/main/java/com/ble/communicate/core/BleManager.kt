@@ -19,9 +19,9 @@ class BleManager(val context: Context, val callback: ()-> String) {
     private var mAdvertiseCallback: SampleAdvertiseCallback? = null
     private var mBluetoothGattServer: BluetoothGattServer? = null
     private var mBluetoothAdapter: BluetoothAdapter? = null
-    private val UUID_SERVER = UUID.fromString("")
+    private val UUID_SERVER = UUID.fromString("0000fff0-0000-1000-8000-00805f9b34fb")
 
-    private val UUID_CHARWRITE = UUID.fromString("")
+    private val UUID_CHARWRITE = UUID.fromString("0000fff1-0000-1000-8000-00805f9b34fb")
     private val devices: ArrayList<BluetoothDevice> = arrayListOf()
     var adverTimes = 0
 

@@ -7,7 +7,7 @@ import com.yanzhenjie.andserver.framework.config.Multipart
 import com.yanzhenjie.andserver.framework.config.WebConfig
 import java.io.File
 
-@Config
+//@Config
 class AppConfig : WebConfig {
     override fun onConfig(context: Context, delegate: WebConfig.Delegate) {
         log("AppConfig onConfig")
