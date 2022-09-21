@@ -13,6 +13,8 @@ import com.ble.commonlib.utils.NetUtils
 import com.ble.communicate.core.WebCoreManager
 import com.ble.communicate.R
 import com.ble.communicate.core.EngineerLogEvent
+import com.ble.communicate.core.EngineerWebEvent
+import com.ble.communicate.core.EngnieerConfig
 import com.ble.communicate.databinding.ActivityEngineerBinding
 import com.ble.communicate.service.BleMaintainService
 import kotlinx.coroutines.*
@@ -44,7 +46,7 @@ class EngineerActivity : BaseBindingActivity<ActivityEngineerBinding>(), Corouti
             initApAndWeb(padID, mPaw)
         }, 1000)
         showInit(true, padID, mPaw)
-        // TODO
+        engnieerConfig = EngnieerConfig()
         registerReceiveWifi()
     }
 
@@ -132,10 +134,23 @@ class EngineerActivity : BaseBindingActivity<ActivityEngineerBinding>(), Corouti
         }
     }
 
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    fun OnEngineerWebEvent(event : EngineerWebEvent) {
+        when (event.aipName) {
+            "login" -> {
+                showLog("有工程APP登录进来")
+            }
+            "submitAll" -> {
+                // TODO
+            }
+        }
+    }
+
     companion object {
         const val PASSWORD = "password"
         const val NAME = "NAME"
         const val IS_INIT = "IS_INIT"
+        lateinit var engnieerConfig: EngnieerConfig
 
         fun startActivity(context: Context) : String {
             // 随机生成热点的名称和密码

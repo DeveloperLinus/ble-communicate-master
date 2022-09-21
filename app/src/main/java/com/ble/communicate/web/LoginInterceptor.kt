@@ -1,7 +1,7 @@
 package com.ble.communicate.web
 
 import android.text.TextUtils
-import com.ble.commonlib.base.Repository
+import com.ble.commonlib.base.RapidSPRepository
 import com.ble.commonlib.base.log
 import com.yanzhenjie.andserver.annotation.Interceptor
 import com.yanzhenjie.andserver.framework.HandlerInterceptor
@@ -10,14 +10,13 @@ import com.yanzhenjie.andserver.framework.handler.RequestHandler
 import com.yanzhenjie.andserver.http.HttpRequest
 import com.yanzhenjie.andserver.http.HttpResponse
 import com.yanzhenjie.andserver.mapping.Addition
-import com.yanzhenjie.andserver.util.MultiValueMap
 import java.lang.reflect.Array
 
 
 // AndServer使用该注解可以生成拦截器
 @Interceptor
 class LoginInterceptor : HandlerInterceptor {
-    private val model = Repository.provide()
+    private val model = RapidSPRepository.provide()
     override fun onIntercept(
         request: HttpRequest,
         response: HttpResponse,

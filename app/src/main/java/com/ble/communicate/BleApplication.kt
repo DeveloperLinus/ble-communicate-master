@@ -2,7 +2,9 @@ package com.ble.communicate
 
 import android.app.Application
 import android.content.Context
-import com.ble.commonlib.base.Repository
+import androidx.multidex.MultiDex
+import com.ble.commonlib.base.RapidSPRepository
+import com.ble.roomlib.db.RoomRepository
 
 class BleApplication : Application()  {
     companion object {
@@ -14,6 +16,12 @@ class BleApplication : Application()  {
         context = this
         super.onCreate()
         //初始化数据库
-        Repository.init(this)
+        RapidSPRepository.init(this)
+        RoomRepository.init(this)
+    }
+
+    override fun attachBaseContext(base: Context?) {
+        super.attachBaseContext(base)
+        MultiDex.install(this);
     }
 }

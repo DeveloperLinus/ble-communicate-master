@@ -4,7 +4,7 @@ import android.content.Context
 import com.ble.commonlib.cache.utils.LocalDataSourceImpl
 import com.ble.commonlib.cache.utils.RapidSP
 
-class Repository {
+class RapidSPRepository {
     companion object {
         fun provide() : BaseRepository? {
             val localDataSource = LocalDataSourceImpl.getInstance()
