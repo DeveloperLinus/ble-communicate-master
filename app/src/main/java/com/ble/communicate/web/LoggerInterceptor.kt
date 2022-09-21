@@ -17,7 +17,7 @@ class LoggerInterceptor : HandlerInterceptor {
         val valueMap = request.getParameter()
         log("path->$path")
         log("method->$method")
-        log("valueMap->${JsonUtil.toJsonString(valueMap)}")
+        log("valueMap->${JsonUtil.toJsonString2(valueMap)}")
         return false
     }
 }

@@ -23,7 +23,7 @@ class WebCoreManager() {
         val ipAddress = NetUtils.getIpAddress(true)
         log("获取到的ip地址为:$ipAddress")
         mServer = AndServer.serverBuilder(BleApplication.context!!)
-            .inetAddress(InetAddress.getByName(hostIp))
+            .inetAddress(InetAddress.getByName(NetUtils.getIpAddress(true))) // 这里，如果要使用热点的ip,192.168.43.1，则传入hostId，若要使用postman进行接口测试，可以传入真实的ip
             .port(8080)
             .timeout(10, TimeUnit.SECONDS)
             .listener(object: Server.ServerListener {

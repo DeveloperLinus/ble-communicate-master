@@ -33,6 +33,9 @@
         <activity android:name=".ui.EngineerActivity"
             android:launchMode="singleInstance"/>
 
+        <activity android:name=".ui.PostmanTestActivity"
+            android:launchMode="singleInstance"/>
+
         <service android:name=".service.BleMaintainService"/>
     </application>
 

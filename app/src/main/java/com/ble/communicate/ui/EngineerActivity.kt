@@ -99,7 +99,6 @@ class EngineerActivity : BaseBindingActivity<ActivityEngineerBinding>(), Corouti
 
             override fun onStopped() {
                 showLog("WEB服务关闭")
-                log("WEB服务关闭")
             }
         }
     }

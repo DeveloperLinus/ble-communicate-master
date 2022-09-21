@@ -37,7 +37,8 @@ class EngineerController {
     @Addition(stringType = ["login"], booleanType = [true])
     @PostMapping(path = ["/getPadConfig"], produces = [MediaType.APPLICATION_JSON_UTF8_VALUE])
     fun getPadConfig(@RequestParam(name = "token") token: String): NetPadConfig {
-        val msg = "接收到的token内容->$token"
+        val token2 = EngineerActivity.engnieerConfig.token
+        val msg = "接收到的token->$token，设备的token2 ->$token2"
         val config = EngineerActivity.engnieerConfig.padConfig
         val authPwd = "test7777" // 授权密码，文件中读取
         config.authorizationPassword = authPwd
@@ -53,10 +54,20 @@ class EngineerController {
         @RequestParam(name = "projectNumber") projectNumber: String,
         @RequestParam(name = "plateNumber") plateNumber: String,
         @RequestParam(name = "equipmentNumber") equipmentNumber: String,
+        @RequestParam(name = "communicationProtocol") communicationProtocol: String,
+        @RequestParam(name = "bindIp") bindIp: String,
+        @RequestParam(name ="delayCallLift") delayCallLift:String,
+        @RequestParam(name="installFloorName") installFloorName: String,
+        @RequestParam(name = "deviceUseEnvironment") deviceUseEnvironment: String,
+        @RequestParam(name = "readHeadNumber") readHeadNumber: String,
         @RequestParam(name = "communicationIp") communicationIp: String,
-        @RequestParam(name = "authorizationPassword") authorizationPassword: String
+        @RequestParam(name = "authorizationPassword") authorizationPassword: String,
+        @RequestParam(name = "installPosition") installPosition : String,
+        @RequestParam(name = "voiceReader") voiceReader: String
     ): String {
-        showLog("token:$token,selectDeviceType:$selectDeviceType,projectNumber:$projectNumber,plateNumber:$plateNumber,equipmentNumber:$equipmentNumber,communicationIp:$communicationIp,$authorizationPassword")
+        showLog("token:$token,selectDeviceType:$selectDeviceType,projectNumber:$projectNumber,plateNumber:$plateNumber,equipmentNumber:$equipmentNumber," +
+                "communicationProtocol:$communicationProtocol, bindIp:$bindIp, delayCallLift:$delayCallLift, installFloorName:$installFloorName, deviceUseEnvironment:$deviceUseEnvironment," +
+                "readHeadNumber:$readHeadNumber, communicationIp:$communicationIp,$authorizationPassword, installPosition:$installPosition, voiceReader:$voiceReader")
         return "OK"
     }
 
