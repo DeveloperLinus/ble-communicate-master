@@ -13,7 +13,7 @@ import com.ble.roomlib.db.utils.log
 import java.io.File
 import java.lang.NullPointerException
 
-@Database(entities = [PadConfigEntity::class], version = 1, exportSchema = false)
+@Database(entities = [PadConfigEntity::class], version = 2, exportSchema = false)
 abstract class RoomRepository : RoomDatabase() {
     companion object {
         @Volatile
@@ -22,6 +22,7 @@ abstract class RoomRepository : RoomDatabase() {
 
         @JvmStatic
         fun init(context: Context) {
+            log("开始初始化数据库对象->${instance == null}")
             instance?: synchronized(this) {
                 instance ?: buildDatabase(context).also { instance = it }
             }
@@ -44,14 +45,13 @@ abstract class RoomRepository : RoomDatabase() {
                         log("数据库已打开")
                     }
                 })
-                .allowMainThreadQueries()
                 .addMigrations(MIGRATION_1_2)
+                .allowMainThreadQueries()
                 .build()
         }
 
         private fun getDatabasePath(): String {
             val sdExist = Environment.MEDIA_MOUNTED == Environment.getExternalStorageState()
-            log("getDatabasePath sdExist->$sdExist")
             return if (sdExist) {
                 val dbDir = Environment.getExternalStorageDirectory().absolutePath + "/mnt/data"
                 val dbPath = "$dbDir/$DATABASE_NAME"
@@ -67,7 +67,16 @@ abstract class RoomRepository : RoomDatabase() {
         // 从版本1升级到版本2执行的操作
         private val MIGRATION_1_2 = object : Migration(1, 2) {
             override fun migrate(database: SupportSQLiteDatabase) {
-                database.execSQL("")
+                log("开始执行版本1到版本2升级操作")
+                database.execSQL("ALTER TABLE padConfig ADD COLUMN plate_number TEXT")
+                database.execSQL("ALTER TABLE padConfig ADD COLUMN communication_protocol TEXT")
+                database.execSQL("ALTER TABLE padConfig ADD COLUMN bind_ip TEXT")
+                database.execSQL("ALTER TABLE padConfig ADD COLUMN delay_call_lift TEXT")
+                database.execSQL("ALTER TABLE padConfig ADD COLUMN install_floor_name TEXT")
+                database.execSQL("ALTER TABLE padConfig ADD COLUMN read_head_number TEXT")
+                database.execSQL("ALTER TABLE padConfig ADD COLUMN install_position TEXT")
+                database.execSQL("ALTER TABLE padConfig ADD COLUMN voice_reader TEXT")
+                log("执行版本1到版本2升级操作完毕")
             }
         }
     }

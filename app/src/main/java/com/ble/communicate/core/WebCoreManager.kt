@@ -33,12 +33,12 @@ class WebCoreManager() {
                 }
 
                 override fun onStarted() {
-                    log("WEB服务启动成功${mListener == null}")
+                    log("WEB服务启动成功${mListener == null}, ip->${mServer.inetAddress.hostAddress} ")
                     mListener?.onStarted(mServer.inetAddress.hostAddress)
                 }
 
                 override fun onStopped() {
-                    log("WEB服务启动成功")
+                    log("WEB服务已被停止")
                     mListener?.onStopped()
                 }
             })

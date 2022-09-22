@@ -15,13 +15,9 @@ class BleApplication : Application()  {
     override fun onCreate() {
         context = this
         super.onCreate()
+        MultiDex.install(this);
         //初始化数据库
         RapidSPRepository.init(this)
         RoomRepository.init(this)
-    }
-
-    override fun attachBaseContext(base: Context?) {
-        super.attachBaseContext(base)
-        MultiDex.install(this);
     }
 }

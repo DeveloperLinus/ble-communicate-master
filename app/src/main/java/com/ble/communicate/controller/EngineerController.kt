@@ -7,6 +7,7 @@ import com.ble.communicate.core.EngineerLogEvent
 import com.ble.communicate.core.EngineerWebEvent
 import com.ble.communicate.model.NetPadConfig
 import com.ble.communicate.ui.EngineerActivity
+import com.ble.roomlib.db.entity.PadConfigEntity
 import com.ble.roomlib.db.manager.PadConfigManager
 import com.yanzhenjie.andserver.annotation.*
 import com.yanzhenjie.andserver.util.MediaType
@@ -26,6 +27,7 @@ class EngineerController {
         if (TextUtils.isEmpty(token)) {
             token = "9S33yyymMtiTc4f1NZfC0Q=="
             model!!.setToken(token)
+            EngineerActivity.engnieerConfig.update()
         }
         val result =
             "api:login,msg = 工程账号登录成功，账号名->->${userName}, 密码->${password}, 令牌->$token" // 登录的账号名:->HQHYMJ001, 密码->itlong@123
@@ -38,7 +40,7 @@ class EngineerController {
     @PostMapping(path = ["/getPadConfig"], produces = [MediaType.APPLICATION_JSON_UTF8_VALUE])
     fun getPadConfig(@RequestParam(name = "token") token: String): NetPadConfig {
         val token2 = EngineerActivity.engnieerConfig.token
-        val msg = "接收到的token->$token，设备的token2 ->$token2"
+        val msg = "接收到的token1->$token，设备的token2 ->$token2"
         val config = EngineerActivity.engnieerConfig.padConfig
         val authPwd = "test7777" // 授权密码，文件中读取
         config.authorizationPassword = authPwd
@@ -68,6 +70,29 @@ class EngineerController {
         showLog("token:$token,selectDeviceType:$selectDeviceType,projectNumber:$projectNumber,plateNumber:$plateNumber,equipmentNumber:$equipmentNumber," +
                 "communicationProtocol:$communicationProtocol, bindIp:$bindIp, delayCallLift:$delayCallLift, installFloorName:$installFloorName, deviceUseEnvironment:$deviceUseEnvironment," +
                 "readHeadNumber:$readHeadNumber, communicationIp:$communicationIp,$authorizationPassword, installPosition:$installPosition, voiceReader:$voiceReader")
+        val padConfig = PadConfigManager.getPadConfig()
+        val padConfigEntity = PadConfigEntity().apply {
+            this.token = token
+            this.deviceType = selectDeviceType
+            this.projectNumber = projectNumber
+            this.plateNumber = plateNumber
+            this.deviceNumber = equipmentNumber
+            this.communicationProtocol = communicationProtocol
+            this.bindIp = bindIp
+            this.delayCallLift = delayCallLift
+            this.installFloorName = installFloorName
+            this.readHeadNumber = readHeadNumber
+            this.installPosition = installPosition
+            this.voiceReader = voiceReader
+            this.communicationIp = communicationIp
+            this.token = token
+        }
+        if (padConfig == null) {
+            PadConfigManager.insert(padConfigEntity)
+        } else {
+            PadConfigManager.update(padConfigEntity)
+        }
+        EngineerActivity.engnieerConfig.update()
         return "OK"
     }
 

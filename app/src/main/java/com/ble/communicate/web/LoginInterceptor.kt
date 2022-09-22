@@ -62,6 +62,7 @@ class LoginInterceptor : HandlerInterceptor {
     private fun isLogin() : Boolean {
         log("start isLogin")
         val token = model?.getToken()
+        log("isLogin是否已经登录,token->$token")
         if (TextUtils.isEmpty(token)) {
             return false
         } else {
