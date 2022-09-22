@@ -46,7 +46,6 @@ class EngineerActivity : BaseBindingActivity<ActivityEngineerBinding>(), Corouti
             initApAndWeb(padID, mPaw)
         }, 1000)
         showInit(true, padID, mPaw)
-        engnieerConfig = EngnieerConfig()
         registerReceiveWifi()
     }
 
@@ -149,7 +148,7 @@ class EngineerActivity : BaseBindingActivity<ActivityEngineerBinding>(), Corouti
         const val PASSWORD = "password"
         const val NAME = "NAME"
         const val IS_INIT = "IS_INIT"
-        lateinit var engnieerConfig: EngnieerConfig
+        val engnieerConfig by lazy { EngnieerConfig() }
 
         fun startActivity(context: Context) : String {
             // 随机生成热点的名称和密码

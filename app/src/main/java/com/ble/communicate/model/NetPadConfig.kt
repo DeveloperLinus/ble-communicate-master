@@ -7,7 +7,7 @@ data class NetPadConfig(
     var selectDeviceType: String = "",
     var projectName: String = "",
     var  plateNumber: String = "",
-    var deviceNumber: String = "",
+    var equipmentNumber: String = "",
     var communicationProtocol: String = "",
     var bindIp: String = "",
     var delayCallLift: String = "",
@@ -25,7 +25,7 @@ data class NetPadConfig(
             selectDeviceType = it.deviceType
             projectName = it.projectNumber
             plateNumber = it.plateNumber
-            deviceNumber = it.deviceNumber
+            equipmentNumber = it.deviceNumber
             communicationProtocol = it.communicationProtocol
             bindIp = it.bindIp
             delayCallLift = it.delayCallLift
