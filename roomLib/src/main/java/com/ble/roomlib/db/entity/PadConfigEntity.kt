@@ -32,6 +32,8 @@ data class PadConfigEntity(
     var voiceReader: String = "", // 语音读头号
     @ColumnInfo(name = "communication_ip")
     var communicationIp: String= "", // 后台通讯ip
+    @ColumnInfo(name = "floor_selection")
+    var floorSelection: String = "",  // 是否有选层功能
     var token: String =""
 ) {
     @PrimaryKey(autoGenerate = true)

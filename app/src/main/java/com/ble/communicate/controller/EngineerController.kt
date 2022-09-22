@@ -26,7 +26,7 @@ class EngineerController {
         var token = model!!.getToken()
         if (TextUtils.isEmpty(token)) {
             token = "9S33yyymMtiTc4f1NZfC0Q=="
-            model!!.setToken(token)
+            model.setToken(token)
             EngineerActivity.engnieerConfig.update()
         }
         val result =
@@ -101,7 +101,7 @@ class EngineerController {
         EventBus.getDefault().post(EngineerLogEvent(msg))
     }
 
-    fun postWebMsg(apiName: String) {
+    private fun postWebMsg(apiName: String) {
         EventBus.getDefault().post(EngineerWebEvent(apiName))
     }
 }

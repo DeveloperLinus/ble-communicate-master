@@ -13,7 +13,7 @@ import com.ble.roomlib.db.utils.log
 import java.io.File
 import java.lang.NullPointerException
 
-@Database(entities = [PadConfigEntity::class], version = 2, exportSchema = false)
+@Database(entities = [PadConfigEntity::class], version = 3, exportSchema = false)
 abstract class RoomRepository : RoomDatabase() {
     companion object {
         @Volatile
@@ -24,6 +24,7 @@ abstract class RoomRepository : RoomDatabase() {
         fun init(context: Context) {
             log("开始初始化数据库对象->${instance == null}")
             instance?: synchronized(this) {
+                log("开始构建数据...")
                 instance ?: buildDatabase(context).also { instance = it }
             }
         }
@@ -45,8 +46,10 @@ abstract class RoomRepository : RoomDatabase() {
                         log("数据库已打开")
                     }
                 })
-                .addMigrations(MIGRATION_1_2)
                 .allowMainThreadQueries()
+                .addMigrations(MIGRATION_1_2)
+                .addMigrations(MIGRATION_2_3)
+//                .fallbackToDestructiveMigration() // 开发阶段升级数据库直接抛弃数据
                 .build()
         }
 
@@ -77,6 +80,14 @@ abstract class RoomRepository : RoomDatabase() {
                 database.execSQL("ALTER TABLE padConfig ADD COLUMN install_position TEXT")
                 database.execSQL("ALTER TABLE padConfig ADD COLUMN voice_reader TEXT")
                 log("执行版本1到版本2升级操作完毕")
+            }
+        }
+
+        private val MIGRATION_2_3 = object : Migration(2, 3) {
+            override fun migrate(database: SupportSQLiteDatabase) {
+                log("开始执行版本2到3升级")
+                database.execSQL("ALTER TABLE padConfig ADD COLUMN floor_selection TEXT NOT NULL DEFAULT  \"1\"")
+                log("版本2到3升级完毕")
             }
         }
     }
